@@ -7,6 +7,8 @@ from rest_framework import status
 from drf_spectacular.utils import extend_schema,OpenApiParameter
 from django.utils.decorators import method_decorator
 from rest_framework.permissions import IsAuthenticated
+#from django.contrib.auth.models import User
+
 # Create your views here.
 
 class JobView(RetrieveUpdateDestroyAPIView, CreateAPIView):
@@ -20,8 +22,7 @@ class JobView(RetrieveUpdateDestroyAPIView, CreateAPIView):
         queryset = self.get_queryset()
         serialize_data = self.serializer_class(queryset, many = True)
         return Response(serialize_data.data, status=status.HTTP_200_OK)
-    
-    
+
     @method_decorator(extend_schema(
         parameters=[
             OpenApiParameter(name='id',

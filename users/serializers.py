@@ -2,6 +2,8 @@ from rest_framework import serializers
 #from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 from .models import User
+from .models import Saved_Jobs
+from leads.models import JobPortal
 #user =  get_user_model()
 
 
@@ -38,3 +40,17 @@ class ChangePasswordSerializer(serializers.Serializer):
     """
     old_password = serializers.CharField(required=True)
     new_password = serializers.CharField(required=True)
+
+
+
+#Saved_Jobs serializer
+class SavedJobsSerializer(serializers.ModelSerializer):
+    #  user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+    #  jobs = serializers.PrimaryKeyRelatedField(queryset=JobPortal.objects.all())
+
+ class Meta:
+        model = Saved_Jobs
+        fields = [ 'user', 'jobs', 'title', 'description', 'created_at', 'updated_at']
+        read_only_fields = ['user']
+
+
